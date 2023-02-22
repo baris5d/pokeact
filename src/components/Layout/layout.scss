@@ -1,9 +1,11 @@
 @import '../../theme/variables.scss';
 
 .container {
-    @include themify($themes) {
-        background-color: themed('backgroundColor');
-    }
     min-height: 100vh;
     padding: 1rem;
+    display: flex;
+    justify-content: center;
+    .wrapper {
+        width: 70%;
+    }
 }

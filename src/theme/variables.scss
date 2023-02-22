@@ -1,29 +1,37 @@
+$red : #E94560;
+$blue : #345a9c;
+$navy : #0F3460;
+$navy-2: #16213E;
+$green : #14C38E;
+$yellow : #f8ce01;
+$orange : #dc3545;
+$purple : #B3005E;
+$grey : #6c757d;
+$black : #343a40;
+$white : #f8f9fa;
+$pink : #FF5F9E;
+
 $themes: (
     light: (
         backgroundColor: #f1f1f1,
         textColor: #333,
-        primaryColor: #007bff,
+        primaryColor: #c21858,
         secondaryColor: #6c757d,
-        successColor: #28a745,
-        infoColor: #17a2b8,
-        warningColor: #ffc107,
-        dangerColor: #dc3545,
-        lightColor: #f8f9fa,
+        lightColor: #f1f1f1,
         darkColor: #343a40,
+        borderColor: $blue,
     ),
     dark: (
-        backgroundColor: #343a40,
-        textColor: #f8f9fa,
-        primaryColor: #007bff,
+        backgroundColor: #1A1A2E,
+        textColor: #eeeeee,
+        primaryColor: #c21858,
         secondaryColor: #6c757d,
-        successColor: #28a745,
-        infoColor: #17a2b8,
-        warningColor: #ffc107,
-        dangerColor: #dc3545,
-        lightColor: #f8f9fa,
-        darkColor: #343a40,
+        lightColor: #f1f1f1,
+        darkColor: #222324,
+        borderColor: $yellow,
     )
 );
+
 
 @mixin themify($themes) {
     @each $theme, $map in $themes {
