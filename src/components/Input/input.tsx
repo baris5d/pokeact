@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './input.scss';
 
 interface Props {
@@ -13,6 +13,11 @@ export const Input = (props: Props) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange(e);
     };
+    const inputRef = useRef<any>(null);
+
+    useEffect(() => {
+        inputRef?.current?.focus();
+    }, []);
 
     return (
         <input
@@ -20,6 +25,7 @@ export const Input = (props: Props) => {
             placeholder={placeholder}
             onChange={handleChange}
             value={value}
+            ref={inputRef}
         />
     );
 };
