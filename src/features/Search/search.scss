@@ -1,0 +1,13 @@
+.search-wrapper {
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    .__center {
+        width: 100%;
+        margin-top: 30%;
+        &.stick {
+            margin-top: 3rem;
+        }
+    }
+}

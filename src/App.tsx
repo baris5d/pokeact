@@ -1,9 +1,9 @@
 import React from 'react';
-import { Input } from './components/Input';
 import Layout from './components/Layout';
 import { ThemeContext } from './contexts/theme-context';
 import useTheme from './utils/hooks/theme';
 import { Header } from './components/Header/header';
+import { Search } from './features/Search/search';
 
 function App(): JSX.Element {
     const [theme, setTheme] = useTheme();
@@ -13,7 +13,7 @@ function App(): JSX.Element {
             <div className={`theme-${theme}`}>
                 <Layout>
                     <Header />
-                    <Input />
+                    <Search />
                 </Layout>
             </div>
         </ThemeContext.Provider>
