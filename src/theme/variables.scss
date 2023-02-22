@@ -1,0 +1,48 @@
+$themes: (
+    light: (
+        backgroundColor: #f1f1f1,
+        textColor: #333,
+        primaryColor: #007bff,
+        secondaryColor: #6c757d,
+        successColor: #28a745,
+        infoColor: #17a2b8,
+        warningColor: #ffc107,
+        dangerColor: #dc3545,
+        lightColor: #f8f9fa,
+        darkColor: #343a40,
+    ),
+    dark: (
+        backgroundColor: #343a40,
+        textColor: #f8f9fa,
+        primaryColor: #007bff,
+        secondaryColor: #6c757d,
+        successColor: #28a745,
+        infoColor: #17a2b8,
+        warningColor: #ffc107,
+        dangerColor: #dc3545,
+        lightColor: #f8f9fa,
+        darkColor: #343a40,
+    )
+);
+
+@mixin themify($themes) {
+    @each $theme, $map in $themes {
+      .theme-#{$theme} & {
+        $theme-map: () !global;
+        @each $key, $submap in $map {
+          $value: map-get(map-get($themes, $theme), '#{$key}');
+          $theme-map: map-merge(
+            $theme-map,
+              (
+                $key: $value,
+              )
+            ) !global;
+          }
+          @content;
+          $theme-map: null !global;
+        }
+     }
+  }
+@function themed($key) {
+    @return map-get($theme-map, $key);
+}
