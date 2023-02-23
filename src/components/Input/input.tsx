@@ -15,6 +15,9 @@ export const Input = (props: Props) => {
     };
     const inputRef = useRef<any>(null);
 
+    /**
+     * Focus on input when component is mounted
+     */
     useEffect(() => {
         inputRef?.current?.focus();
     }, []);
