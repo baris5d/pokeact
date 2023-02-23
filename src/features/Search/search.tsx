@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { Input } from '../../components/Input';
+import { CardListing } from '../CardListing/card-listing';
 import './search.scss';
 
 export const Search = () => {
-    const [search, setSearch] = React.useState<string>('');
+    const [search, setSearch] = React.useState<string>('s');
     const [typing, setTyping] = React.useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +28,8 @@ export const Search = () => {
                     onChange={handleChange}
                     value={search}
                 />
+
+                <CardListing name="Search Results" />
             </div>
         </div>
     );

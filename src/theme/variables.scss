@@ -11,6 +11,9 @@ $black : #343a40;
 $white : #f8f9fa;
 $pink : #FF5F9E;
 
+$titleFont: 'Lato', sans-serif;
+
+
 $themes: (
     light: (
         backgroundColor: #f1f1f1,
@@ -32,7 +35,13 @@ $themes: (
     )
 );
 
-
+/**
+  * Mixin to generate theme classes
+  * @param {Map} $themes - Map of themes
+  * @param {String} $theme - Name of the theme
+  * @param {String} $key - Name of the variable
+  * @param {String} $value - Value of the variable
+*/
 @mixin themify($themes) {
     @each $theme, $map in $themes {
       .theme-#{$theme} & {
@@ -48,9 +57,10 @@ $themes: (
           }
           @content;
           $theme-map: null !global;
-        }
-     }
-  }
+      }
+    }
+}
+
 @function themed($key) {
     @return map-get($theme-map, $key);
 }
