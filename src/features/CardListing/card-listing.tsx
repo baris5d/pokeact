@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { Card } from '../../components/Card/card';
+import { NotFound } from '../../components/NotFound/not-found';
 import { PokeAPIResource, Pokemon } from '../../types/pokemon';
 import { getPokemon } from '../../utils/api/pokeapi';
 import { usePokemons } from '../../utils/hooks/pokemons';
@@ -52,17 +53,19 @@ export const CardListing = (props: Props) => {
     };
 
     return (
-        <div className="cards__grid">
-            {pokemons.map((item: Pokemon, index: number) => {
-                return <Card key={index} {...item}></Card>;
-            })}
+        <>
+            <div className="cards__grid">
+                {pokemons.map((item: Pokemon, index: number) => {
+                    return <Card key={index} {...item}></Card>;
+                })}
+            </div>
             {isFetched && pokemons.length === 0 && (
                 <div className="cards__grid__empty">
                     <div className="cards__grid__empty__text">
-                        No results found
+                        <NotFound message="No results found" />
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 };
