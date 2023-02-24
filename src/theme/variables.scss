@@ -12,6 +12,7 @@ $white : #f8f9fa;
 $pink : #FF5F9E;
 
 $titleFont: 'Lato', sans-serif;
+$titleSize: 2.5rem;
 
 
 $themes: (
@@ -19,7 +20,7 @@ $themes: (
         backgroundColor: #f1f1f1,
         textColor: #333,
         primaryColor: #c21858,
-        secondaryColor: #6c757d,
+        secondaryColor: #31363a,
         lightColor: #f1f1f1,
         darkColor: #343a40,
         borderColor: $blue,
@@ -29,7 +30,7 @@ $themes: (
         backgroundColor: #1A1A2E,
         textColor: #eeeeee,
         primaryColor: #c21858,
-        secondaryColor: #6c757d,
+        secondaryColor: #31363a,
         lightColor: #f1f1f1,
         darkColor: #222324,
         borderColor: $yellow,

@@ -26,7 +26,7 @@ export const Search = () => {
         <div className="search-wrapper">
             <div className={`__center ${search.length ? ' stick' : ''}`}>
                 <Input
-                    placeholder="Search for a PoKeMoN"
+                    placeholder="Search"
                     onChange={handleChange}
                     value={search}
                 />

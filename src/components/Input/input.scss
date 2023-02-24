@@ -22,4 +22,18 @@
             opacity: .5;
         }
     }
+    @media screen and (max-width: 768px) {
+        font-size: 1.5rem;
+        font-family: $titleFont;
+        text-shadow: none;
+        @include themify($themes) {
+            border-bottom: 1px solid themed('borderColor');
+            color: themed('textColor');
+            &::placeholder, &::-webkit-input-placeholder{
+                color: themed('textColor');
+                opacity: .5;
+            }
+        }
+        letter-spacing: 0;
+    }
 }

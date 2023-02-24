@@ -29,25 +29,18 @@
     &__title {
         font-family: $titleFont;
         font-weight: 700;
-        color: $navy-2;
         border-radius: 4px;
         padding: 3px 15px;
         width: fit-content;
-        @include themify($themes) {
-            background-color: rgba(themed('dominantColor'), .4);
-        }
+        
     }
 
     &__id {
         font-family: $titleFont;
         font-weight: 400;
-        color: $navy;
         border-radius: 4px;
         padding: 3px 15px;
         width: fit-content;
-        @include themify($themes) {
-            background-color: rgba(themed('dominantColor'), .4);
-        }
     }
 
     &__image {
@@ -55,7 +48,6 @@
             display: flex;
             justify-content: center;
             padding: 2rem 0;
-            height: 14rem;
 
             img {
                 max-width: 100%;
