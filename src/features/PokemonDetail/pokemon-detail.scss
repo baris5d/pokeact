@@ -1,0 +1,186 @@
+@import '../../theme/variables.scss';
+
+.pokemon {
+    &-detail{
+        &__wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 60%;
+            @media screen and (max-width: 768px) {
+                max-width: 90%;
+            }
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            position: fixed;
+            z-index: 9999;
+            @include themify($themes) {
+                background-color: themed('backgroundColor');
+                color: themed('textColor');
+                box-shadow: 0 0 30px rgba($navy-2, .3);
+            }
+        }
+
+        &:after {
+            content: '';
+            width: 100%;
+            height:100vh;
+            position: fixed;
+            z-index: 998;
+            background-color: rgba($black, .6);
+        }
+        
+        &__image {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        &__name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        &__types {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+            &-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 5px 10px;
+                border-radius: 10px;
+                margin: 0 5px 5px 0;
+                font-size: 14px;
+                font-weight: 700;
+                text-transform: uppercase;
+                &--normal {
+                    background-color: #a8a878;
+                    color: #fff;
+                }
+                &--fire {
+                    background-color: #f08030;
+                    color: #fff;
+                }
+                &--water {
+                    background-color: #6890f0;
+                    color: #fff;
+                }
+                &--electric {
+                    background-color: #f8d030;
+                    color: #fff;
+                }
+                &--grass {
+                    background-color: #78c850;
+                    color: #fff;
+                }
+                &--ice {
+                    background-color: #98d8d8;
+                    color: #fff;
+                }
+                &--fighting {
+                    background-color: #c03028;
+                    color: #fff;
+                }
+                &--poison {
+                    background-color: #a040a0;
+                    color: #fff;
+                }
+                &--ground {
+                    background-color: #e0c068;
+                    color: #fff;
+                }
+                &--flying {
+                    background-color: #a890f0;
+                    color: #fff;
+                }
+                &--psychic {
+                    background-color: #f85888;
+                    color: #fff;
+                }
+                &--bug {
+                    background-color: #a8b820;
+                    color: #fff;
+                }
+                &--rock {
+                    background-color: #b8a038;
+                    color: #fff;
+                }
+                &--ghost {
+                    background-color: #705898;
+                    color: #fff;
+                }
+                &--dragon {
+                    background-color: #7038f8;
+                    color: #fff;
+                }
+                &--dark {
+                    background-color: #705848;
+                    color: #fff;
+                }
+                &--steel {
+                    background-color: #b8b8d0;
+                    color: #fff;
+                }
+                &--fairy {
+                    background-color: #ee99ac;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    @include themify($themes) {
+        color: themed('textColor');
+    }
+    button {
+        padding: 5px;
+        width:32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background-color: rgba($black, .6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        svg {
+            width: 18px;
+            height: 18px;
+            @include themify($themes) {
+                fill: themed('textColor');
+                stroke: themed('textColor');
+            }
+        }
+    }
+}
+
+.out-enter {
+    transform: scale(.5) translate(-100%, -100%);
+}
+.out-enter-active {
+    transform: scale(1) translate(-50%, -50%);
+    transition: transform 3s ease-in;
+}
+.out-exit {
+    opacity: 1;
+}
+.out-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
+  
