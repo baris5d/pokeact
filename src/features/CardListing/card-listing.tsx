@@ -14,9 +14,12 @@ export interface Props {
 export const CardListing = (props: Props) => {
     const { filter } = props;
 
-    const { data, isFetched, isError, error } = usePokemons('pokemon', {
-        limit: '1300',
-    });
+    const { data, isFetched, isError, error, isLoading } = usePokemons(
+        'pokemon',
+        {
+            limit: '1300',
+        },
+    );
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
     const handleError = useErrorHandler();
 
@@ -35,7 +38,7 @@ export const CardListing = (props: Props) => {
             setPokemons([]);
             const filtered = data
                 .filter((item) => {
-                    return item.name.includes(filter);
+                    return item.name.includes(filter.toLowerCase());
                 })
                 .sort((a: PokeAPIResource, b: PokeAPIResource) => {
                     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
@@ -59,7 +62,7 @@ export const CardListing = (props: Props) => {
                     return <Card key={index} {...item}></Card>;
                 })}
             </div>
-            {isFetched && pokemons.length === 0 && (
+            {!isLoading && isFetched && pokemons.length === 0 && (
                 <div className="cards__grid__empty">
                     <div className="cards__grid__empty__text">
                         <NotFound message="No results found" />

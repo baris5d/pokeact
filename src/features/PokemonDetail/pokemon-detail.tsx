@@ -113,16 +113,27 @@ export const PokemonDetail = () => {
                                             stats={collectedPokemon.stats}
                                             color={data}
                                         />
-                                        <PokemonTypes
-                                            types={collectedPokemon.types}
-                                            title="Strong"
-                                            prop="double_damage_to"
-                                        />
-                                        <PokemonTypes
-                                            types={collectedPokemon.types}
-                                            title="Weak"
-                                            prop="double_damage_from"
-                                        />
+
+                                        {[
+                                            'double_damage_to',
+                                            'double_damage_from',
+                                        ].map((prop, index) => {
+                                            return (
+                                                <PokemonTypes
+                                                    types={
+                                                        collectedPokemon.types
+                                                    }
+                                                    title={
+                                                        prop ===
+                                                        'double_damage_to'
+                                                            ? 'Strong'
+                                                            : 'Weak'
+                                                    }
+                                                    prop={prop}
+                                                    key={index}
+                                                />
+                                            );
+                                        })}
                                     </div>
                                     <div className="close">
                                         <button onClick={goBack}>
