@@ -1,4 +1,5 @@
 export interface PokeAPIResource {
+    [x: string]: any;
     name: string;
     url: string;
 }
@@ -12,7 +13,7 @@ export interface Abilities {
 export interface Type {
     slot: number;
     type: PokeAPIResource;
-    damage_relations?: DamageRelations[];
+    damage_relations: DamageRelations[];
 }
 
 export interface DamageRelations {
@@ -42,6 +43,11 @@ export interface DreamWorld {
     front_default: string;
 }
 
+export interface Stats {
+    base_stat: number;
+    effort: number;
+    stat: PokeAPIResource;
+}
 export interface Pokemon {
     abilities: Abilities[];
     height: number;
@@ -52,4 +58,5 @@ export interface Pokemon {
     sprites: Sprites;
     types: Type[];
     weight: number;
+    stats: Stats[];
 }
