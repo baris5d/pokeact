@@ -14,6 +14,7 @@ function Header(): JSX.Element {
 
     return (
         <div className="header">
+            <img src="/logo.svg" alt="Pokeact" className="logo" />
             <button onClick={handleThemeChange}>
                 <img
                     src={theme === 'dark' ? moon : sun}

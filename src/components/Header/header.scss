@@ -1,14 +1,26 @@
 .header {
-    position: absolute;
-    right: 20px;
-    top: 20px;
+    
     button {
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
         background-color: transparent;
         border: none;
         cursor: pointer;
         img {
             width: 30px;
             height: 30px;
+        }
+    }
+    .logo {
+        width: 5rem;
+        height: 5rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        img {
+            width: 100%;
+            height: 100%;
         }
     }
 }
