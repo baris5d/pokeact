@@ -1,6 +1,5 @@
 // react-query hooks to fetch and cache pokemon data
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { PokeAPIResource, Pokemon } from '../../types/pokemon';
 import { getAllPokemons, getPokemon } from '../api/pokeapi';
@@ -26,7 +25,6 @@ export const usePokemon = (id: string) => {
     });
     return query;
 };
-
 /**
  * usePokemonCollector is a custom hook that returns a pokemon object with
  * properties that are defined in desiredProps. The properties can be nested
