@@ -1,7 +1,7 @@
 import React from 'react';
 import { useOnLoadImages } from '../../utils/hooks/load-images';
 import { PokeLoader } from '../PokeLoader/poke-loader';
-
+import './image.scss';
 interface ImageProps {
     src: string;
     alt: string;
@@ -14,9 +14,13 @@ export const Image = (props: ImageProps) => {
     const imageLoaded = useOnLoadImages(wrapperRef);
 
     return (
-        <div ref={wrapperRef}>
-            {!imageLoaded && <PokeLoader />}
-            <img src={src} alt={alt} className={className} />
+        <div ref={wrapperRef} className="image-wrapper">
+            {!imageLoaded && <PokeLoader className="image-loader" />}
+            <img
+                src={src}
+                alt={alt}
+                className={`${className} ${imageLoaded ? 'active' : 'disable'}`}
+            />
         </div>
     );
 };
