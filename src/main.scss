@@ -18,3 +18,10 @@
         background-color : map-get($map, 'backgroundColor');
     }
 }
+
+a {
+  text-decoration: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}

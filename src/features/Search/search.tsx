@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Input } from '../../components/Input';
+import { PoketopsLoader } from '../../components/PokeLoader/poke-loader';
 import { CardListing } from '../CardListing/card-listing';
 import './search.scss';
 
 export const Search = () => {
-    const [search, setSearch] = React.useState<string>('s');
+    const [search, setSearch] = React.useState<string>('');
     const [typing, setTyping] = React.useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +17,7 @@ export const Search = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setTyping(false);
-        }, 500);
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, [typing]);
@@ -29,7 +31,15 @@ export const Search = () => {
                     value={search}
                 />
 
-                <CardListing name="Search Results" />
+                {search.length > 0 && !typing && (
+                    <CardListing filter={search} />
+                )}
+
+                {search.length > 0 && typing && (
+                    <>
+                        <PoketopsLoader />
+                    </>
+                )}
             </div>
         </div>
     );
