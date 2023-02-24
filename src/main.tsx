@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import App from './app';
+import App from './App';
 import './main.scss';
 import PokeRoutes from './routes';
 
@@ -12,7 +12,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
         <ErrorBoundary
             FallbackComponent={({ error }) => {
-                console.log('sdlkhgshkldghksdg ');
                 return (
                     <div>
                         <h1>An error occurred: {error.message}</h1>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import App from './app';
+import App from './App';
 import './main.scss';
 
 const PokeRoutes: React.FC<any> = () => {
