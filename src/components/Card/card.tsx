@@ -4,21 +4,17 @@ import Color, { useColor } from 'color-thief-react';
 import { PokeLoader } from '../PokeLoader/poke-loader';
 import { Pokemon } from '../../types/pokemon';
 import { Link } from 'react-router-dom';
-import { findProperImage } from '../../utils/helpers';
+import {
+    findProperImage,
+    formatNumber,
+    kebabCaseToTitleCase,
+    useOppositeColor,
+    useRGBA,
+} from '../../utils/helpers';
+import { Image } from '../Image/image';
 
 export const Card = (props: Pokemon) => {
     const { name, id, sprites } = props;
-
-    const formatNumber = (num: string) => {
-        return num.padStart(3, '0');
-    };
-
-    const useRGBA = (hex: string) => {
-        const [r, g, b] = hex.match(/\w\w/g)?.map((c) => parseInt(c, 16)) ?? [
-            0, 0, 0,
-        ];
-        return `rgba(${r}, ${g}, ${b}, 0.8)`;
-    };
 
     return (
         <Link to={`/pokemon/${id}`}>
@@ -43,17 +39,27 @@ export const Card = (props: Pokemon) => {
                                     style={{ backgroundColor: useRGBA(data) }}
                                 >
                                     <div className="card__image-wrapper">
-                                        <img
+                                        <Image
                                             src={findProperImage(sprites)}
                                             alt={name}
                                             className="card__image"
                                         />
                                     </div>
                                     <div className="card__info">
-                                        <div className="card__title">
-                                            {name}
+                                        <div
+                                            className="card__title"
+                                            style={{
+                                                color: useOppositeColor(data),
+                                            }}
+                                        >
+                                            {kebabCaseToTitleCase(name)}
                                         </div>
-                                        <div className="card__id">
+                                        <div
+                                            className="card__id"
+                                            style={{
+                                                color: useOppositeColor(data),
+                                            }}
+                                        >
                                             {formatNumber(id.toString())}
                                         </div>
                                     </div>
