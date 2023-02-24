@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 import { Card } from '../../components/Card/card';
 import { PokeAPIResource, Pokemon } from '../../types/pokemon';
 import { getPokemon } from '../../utils/api/pokeapi';
@@ -16,9 +17,16 @@ export const CardListing = (props: Props) => {
         limit: '1300',
     });
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const handleError = useErrorHandler();
 
     useEffect(() => {
-        isFetched && filterResults();
+        if (isFetched) {
+            try {
+                filterResults();
+            } catch (err) {
+                handleError(err);
+            }
+        }
     }, [isFetched, filter]);
 
     const filterResults = () => {

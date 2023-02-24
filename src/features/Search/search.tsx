@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { useErrorHandler } from 'react-error-boundary';
 import { Input } from '../../components/Input';
 import { PoketopsLoader } from '../../components/PokeLoader/poke-loader';
 import { CardListing } from '../CardListing/card-listing';

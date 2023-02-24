@@ -1,5 +1,6 @@
 // react-query hooks to fetch and cache pokemon data
 import React from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 import { useQuery } from 'react-query';
 import { PokeAPIResource, Pokemon } from '../../types/pokemon';
 import { getAllPokemons, getPokemon } from '../api/pokeapi';
@@ -37,6 +38,8 @@ export const usePokemon = (id: string) => {
 export const usePokemonCollector = (id: string, desiredProps: string[]) => {
     const { data, isLoading, isError } = usePokemon(id);
 
+    const handleError = useErrorHandler();
+
     const collectedProps: any = React.useMemo(() => {
         if (!isLoading && !isError && data) {
             return desiredProps.reduce((acc, prop) => {
@@ -52,19 +55,23 @@ export const usePokemonCollector = (id: string, desiredProps: string[]) => {
                 const items: any = {};
                 // destruct the desiredProps array and get the data
                 // each prop being destructured is a string that can be nested
-                desiredProps.forEach(async (prop) => {
-                    const [key, subKey] = prop.split('.'); // split the prop string given [key.subkey]
-                    const lookup: any = data[key as keyof typeof data];
-                    if (!items[key]) {
-                        items[key] = [];
-                    }
-                    if (lookup && lookup.length > 0) {
-                        for (const item of lookup) {
-                            const data = await getPokemon(item[subKey].url);
-                            items[key].push({ [subKey]: data });
+                try {
+                    desiredProps.forEach(async (prop) => {
+                        const [key, subKey] = prop.split('.'); // split the prop string given [key.subkey]
+                        const lookup: any = data[key as keyof typeof data];
+                        if (!items[key]) {
+                            items[key] = [];
                         }
-                    }
-                });
+                        if (lookup && lookup.length > 0) {
+                            for (const item of lookup) {
+                                const data = await getPokemon(item[subKey].url);
+                                items[key].push({ [subKey]: data });
+                            }
+                        }
+                    });
+                } catch (err) {
+                    handleError(err);
+                }
                 const mergedData = { ...data, ...items };
                 return mergedData;
             }
