@@ -1,53 +1,67 @@
 import React from 'react';
 import './card.scss';
 import Color, { useColor } from 'color-thief-react';
-import PokeLoader from '../PokeLoader/poke-loader';
+import { PokeLoader } from '../PokeLoader/poke-loader';
+import { Pokemon } from '../../types/pokemon';
+import { Link } from 'react-router-dom';
+import { findProperImage } from '../../utils/helpers';
 
-export interface Props {
-    name: string;
-    id: string;
-    image: string;
-}
-
-export const Card = (props: Props) => {
-    const { name, id, image } = props;
+export const Card = (props: Pokemon) => {
+    const { name, id, sprites } = props;
 
     const formatNumber = (num: string) => {
         return num.padStart(3, '0');
     };
 
+    const useRGBA = (hex: string) => {
+        const [r, g, b] = hex.match(/\w\w/g)?.map((c) => parseInt(c, 16)) ?? [
+            0, 0, 0,
+        ];
+        return `rgba(${r}, ${g}, ${b}, 0.8)`;
+    };
+
     return (
-        <div className={`card`}>
-            <Color src={image} format="hex" crossOrigin="Anonymous">
-                {({ data, loading, error }) => {
-                    if (loading)
-                        return (
-                            <div className="card__wrapper">
-                                <PokeLoader />
-                            </div>
-                        );
-                    if (error) return <div>{JSON.stringify(error)}</div>;
-                    if (data)
-                        return (
-                            <div
-                                className="card__wrapper"
-                                style={{ backgroundColor: data }}
-                            >
-                                <div className="card__image-wrapper">
-                                    <img
-                                        src={image}
-                                        alt={name}
-                                        className="card__image"
-                                    />
+        <Link to={`/pokemon/${id}`}>
+            <div className={`card`}>
+                <Color
+                    src={findProperImage(sprites)}
+                    format="hex"
+                    crossOrigin="Anonymous"
+                >
+                    {({ data, loading, error }) => {
+                        if (loading)
+                            return (
+                                <div className="card__wrapper">
+                                    <PokeLoader />
                                 </div>
-                                <div className="card__title">{name}</div>
-                                <div className="card__id">
-                                    {formatNumber(id)}
+                            );
+                        if (error) return <div>{JSON.stringify(error)}</div>;
+                        if (data)
+                            return (
+                                <div
+                                    className="card__wrapper"
+                                    style={{ backgroundColor: useRGBA(data) }}
+                                >
+                                    <div className="card__image-wrapper">
+                                        <img
+                                            src={findProperImage(sprites)}
+                                            alt={name}
+                                            className="card__image"
+                                        />
+                                    </div>
+                                    <div className="card__info">
+                                        <div className="card__title">
+                                            {name}
+                                        </div>
+                                        <div className="card__id">
+                                            {formatNumber(id.toString())}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                }}
-            </Color>
-        </div>
+                            );
+                    }}
+                </Color>
+            </div>
+        </Link>
     );
 };

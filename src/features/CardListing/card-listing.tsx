@@ -1,30 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from '../../components/Card/card';
+import { PokeAPIResource, Pokemon } from '../../types/pokemon';
+import { getPokemon } from '../../utils/api/pokeapi';
+import { usePokemons } from '../../utils/hooks/pokemons';
 import './card-listing.scss';
 
 export interface Props {
-    name: string;
+    filter: string;
 }
 
 export const CardListing = (props: Props) => {
-    const { name } = props;
+    const { filter } = props;
+
+    const { data, isFetched, isError, error } = usePokemons('pokemon', {
+        limit: '1300',
+    });
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+
+    useEffect(() => {
+        isFetched && filterResults();
+    }, [isFetched, filter]);
+
+    const filterResults = () => {
+        if (data?.length) {
+            setPokemons([]);
+            const filtered = data
+                .filter((item) => {
+                    return item.name.includes(filter);
+                })
+                .sort((a: PokeAPIResource, b: PokeAPIResource) => {
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+                    return 0;
+                })
+                .slice(0, 3);
+
+            filtered.forEach((item) => {
+                getPokemon(item.url).then((res: Pokemon) => {
+                    setPokemons((prev) => [...prev, res]);
+                });
+            });
+        }
+    };
+
     return (
         <div className="cards__grid">
-            <Card
-                name={name}
-                image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
-                id="1"
-            ></Card>
-            <Card
-                name={name}
-                image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg"
-                id="2"
-            ></Card>
-            <Card
-                name={name}
-                image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/5.svg"
-                id="13"
-            ></Card>
+            {pokemons.map((item: Pokemon, index: number) => {
+                return <Card key={index} {...item}></Card>;
+            })}
+            {pokemons.length === 0 && (
+                <div className="cards__grid__empty">
+                    <div className="cards__grid__empty__text">
+                        No results found
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

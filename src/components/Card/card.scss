@@ -16,18 +16,38 @@
         box-shadow: 0 1px 2px 0 rgba($black, 0.1);
         text-align: center;
         background-color: $grey;
+        justify-content: space-between;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     &__title {
         font-family: $titleFont;
         font-weight: 700;
         color: $navy-2;
+        border-radius: 4px;
+        padding: 3px 15px;
+        width: fit-content;
+        @include themify($themes) {
+            background-color: rgba(themed('dominantColor'), .4);
+        }
     }
 
     &__id {
         font-family: $titleFont;
         font-weight: 400;
         color: $navy;
+        border-radius: 4px;
+        padding: 3px 15px;
+        width: fit-content;
+        @include themify($themes) {
+            background-color: rgba(themed('dominantColor'), .4);
+        }
     }
 
     &__image {
@@ -35,6 +55,13 @@
             display: flex;
             justify-content: center;
             padding: 2rem 0;
+            height: 14rem;
+
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
         }
         align-self: center;
         margin: 0 0 1rem;

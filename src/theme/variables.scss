@@ -7,7 +7,7 @@ $yellow : #f8ce01;
 $orange : #dc3545;
 $purple : #B3005E;
 $grey : #6c757d;
-$black : #343a40;
+$black : #111112;
 $white : #f8f9fa;
 $pink : #FF5F9E;
 
@@ -23,6 +23,7 @@ $themes: (
         lightColor: #f1f1f1,
         darkColor: #343a40,
         borderColor: $blue,
+        dominantColor: #f1f1f1
     ),
     dark: (
         backgroundColor: #1A1A2E,
@@ -32,6 +33,7 @@ $themes: (
         lightColor: #f1f1f1,
         darkColor: #222324,
         borderColor: $yellow,
+        dominantColor: #f1f1f1
     )
 );
 
