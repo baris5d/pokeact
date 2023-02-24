@@ -3,6 +3,7 @@ import './poke-loader.scss';
 
 interface LoaderProps {
     size?: number;
+    className?: string;
 }
 
 const defaultProps: LoaderProps = {
@@ -15,12 +16,21 @@ const PokeLoader: React.FC<LoaderProps> = ({ size }) => (
     </div>
 );
 
-const Poketop = ({ size }: LoaderProps) => (
+const PoketopsLoader: React.FC<LoaderProps> = () => (
+    <div className="poketops-loader">
+        <Poketop size={24} className="poketops__poke" />
+        <Poketop size={24} className="poketops__poke" />
+        <Poketop size={24} className="poketops__poke" />
+    </div>
+);
+
+const Poketop = ({ size, className }: LoaderProps) => (
     <svg
         width={`${size}px`}
         height={`${size}px`}
         version="1.1"
         viewBox="0 0 511.98 511.98"
+        className={className}
         xmlns="http://www.w3.org/2000/svg"
     >
         <path
@@ -56,6 +66,7 @@ const Poketop = ({ size }: LoaderProps) => (
         />
     </svg>
 );
+
 PokeLoader.defaultProps = defaultProps;
 
-export default PokeLoader;
+export { PokeLoader, PoketopsLoader };
