@@ -56,7 +56,7 @@ export const CardListing = (props: Props) => {
             {pokemons.map((item: Pokemon, index: number) => {
                 return <Card key={index} {...item}></Card>;
             })}
-            {pokemons.length === 0 && (
+            {isFetched && pokemons.length === 0 && (
                 <div className="cards__grid__empty">
                     <div className="cards__grid__empty__text">
                         No results found

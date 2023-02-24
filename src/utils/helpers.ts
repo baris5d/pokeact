@@ -1,11 +1,21 @@
 export const findProperImage = (sprites: any) => {
     if (sprites.other.dream_world.front_default) {
         return sprites.other.dream_world.front_default;
-    } else if (sprites.other.home.front_default) {
+    }
+
+    if (sprites.other.home.front_default) {
         return sprites.other.home.front_default;
-    } else {
+    }
+
+    if (sprites.other['official-artwork'].front_default) {
+        return sprites.other['official-artwork'].front_default;
+    }
+
+    if (sprites.front_default) {
         return sprites.front_default;
     }
+
+    return './logo.svg';
 };
 
 export const useRGBA = (hex: string) => {
