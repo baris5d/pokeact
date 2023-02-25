@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useOnLoadImages } from '../../utils/hooks/load-images';
 import { PokeLoader } from '../PokeLoader/poke-loader';
 import './image.scss';
@@ -10,7 +10,7 @@ interface ImageProps {
 export const Image = (props: ImageProps) => {
     const { src, alt, className } = props;
 
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
     const imageLoaded = useOnLoadImages(wrapperRef);
 
     return (
