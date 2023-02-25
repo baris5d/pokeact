@@ -22,7 +22,7 @@ export const Card = (props: Pokemon) => {
 
     return (
         <Link to={`/pokemon/${id}`}>
-            <div className={`card`}>
+            <div className={`card`} data-testid="card">
                 {loading && <PokeLoader />}
                 {error && <div>{JSON.stringify(error)}</div>}
                 {data && (
@@ -35,11 +35,13 @@ export const Card = (props: Pokemon) => {
                                 src={findProperImage(sprites)}
                                 alt={name}
                                 className="card__image"
+                                data-testid="card__image"
                             />
                         </div>
                         <div className="card__info">
                             <div
                                 className="card__title"
+                                data-testid="card__title"
                                 style={{
                                     color: useOppositeColor(data),
                                 }}
@@ -48,6 +50,7 @@ export const Card = (props: Pokemon) => {
                             </div>
                             <div
                                 className="card__id"
+                                data-testid="card__id"
                                 style={{
                                     color: useOppositeColor(data),
                                 }}
