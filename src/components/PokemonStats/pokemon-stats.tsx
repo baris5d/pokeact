@@ -19,13 +19,21 @@ export const PokemonDetailStats = (props: StatProps) => {
             <div className="pokemon-detail__stats-wrapper">
                 {stats.map((item, index) => {
                     return (
-                        <div className="pokemon-detail__stats-item" key={index}>
-                            <div className="pokemon-detail__stats-item-name">
+                        <div
+                            className="pokemon-detail__stats-item"
+                            data-testid="pokemon-detail-stats-item"
+                            key={index}
+                        >
+                            <div
+                                className="pokemon-detail__stats-item-name"
+                                data-testid="pokemon-detail-stats-item-name"
+                            >
                                 {kebabCaseToTitleCase(item.stat.name)}
                             </div>
                             <div className="pokemon-detail__stats-item-bar">
                                 <div
                                     className="pokemon-detail__stats-item-bar-inner"
+                                    data-testid="pokemon-detail-stats-item-bar-inner"
                                     style={{
                                         width: `${
                                             (item.base_stat * 100) /
@@ -36,7 +44,10 @@ export const PokemonDetailStats = (props: StatProps) => {
                                     }}
                                 ></div>
                             </div>
-                            <div className="pokemon-detail__stats-item-value">
+                            <div
+                                className="pokemon-detail__stats-item-value"
+                                data-testid="pokemon-detail-stats-item-value"
+                            >
                                 {item.base_stat}
                             </div>
                         </div>
