@@ -11,13 +11,13 @@ const defaultProps: LoaderProps = {
 };
 
 const PokeLoader: React.FC<LoaderProps> = ({ size, className }) => (
-    <div className={`poke-loader ${className}`}>
+    <div className={`poke-loader ${className}`} data-role="loader">
         <Poketop size={size} />
     </div>
 );
 
 const PoketopsLoader: React.FC<LoaderProps> = () => (
-    <div className="poketops-loader">
+    <div className="poketops-loader" data-role="loader">
         <Poketop size={24} className="poketops__poke" />
         <Poketop size={24} className="poketops__poke" />
         <Poketop size={24} className="poketops__poke" />
