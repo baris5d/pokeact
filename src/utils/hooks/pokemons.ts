@@ -1,5 +1,5 @@
 // react-query hooks to fetch and cache pokemon data
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useQuery } from 'react-query';
 import { PokeAPIResource, Pokemon } from '../../types/pokemon';
@@ -40,7 +40,7 @@ export const usePokemonCollector = (id: string, desiredProps: string[]) => {
 
     const handleError = useErrorHandler();
 
-    const collectedProps: any = React.useMemo(() => {
+    const collectedProps: any = useMemo(() => {
         if (!isLoading && !isError && data) {
             return desiredProps.reduce((acc, prop) => {
                 (acc as any)[prop] = data[prop as keyof typeof data];
@@ -49,7 +49,7 @@ export const usePokemonCollector = (id: string, desiredProps: string[]) => {
         }
     }, [data, isLoading, isError, desiredProps]);
 
-    const collectedPokemon: Pokemon = React.useMemo(() => {
+    const collectedPokemon: Pokemon = useMemo(() => {
         if (!isLoading && !isError && data) {
             if (desiredProps && desiredProps.length > 0) {
                 const items: any = {};
