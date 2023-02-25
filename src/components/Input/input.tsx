@@ -29,6 +29,7 @@ export const Input = (props: Props) => {
             onChange={handleChange}
             value={value}
             ref={inputRef}
+            data-testid="input"
         />
     );
 };
