@@ -9,4 +9,7 @@ export default {
     transform: {
         '^.+\\.(ts|js)x?$': 'ts-jest',
     },
+    moduleNameMapper: {
+        '\\.(css|scss|jpg|png|svg)$': '<rootDir>/empty-module.js',
+    },
 };
