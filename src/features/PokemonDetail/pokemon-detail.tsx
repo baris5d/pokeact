@@ -1,10 +1,11 @@
 import Color, { useColor } from 'color-thief-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Image } from '../../components/Image/image';
 import { PokemonDetailStats } from '../../components/PokemonStats/pokemon-stats';
 import { PokemonTypes } from '../../components/PokemonTypes/pokemon-types';
 import { PokemonType, TypeIcon } from '../../components/TypeIcon/type-icon';
+import { Type } from '../../types/pokemon';
 import {
     dmToFtAndIn,
     findProperImage,
@@ -20,12 +21,18 @@ export const PokemonDetail = () => {
     const { pokemonId } = useParams();
     const navigate = useNavigate();
 
+    const [types, setTypes] = React.useState<Type[]>([]);
+
     const { collectedPokemon } = usePokemonCollector(pokemonId!, [
         'types.type',
         'abilities.ability',
     ]);
 
-    const { data, loading, error } = useColor(
+    useEffect(() => {
+        setTypes(collectedPokemon?.types as Type[]);
+    }, [collectedPokemon]);
+
+    const { data } = useColor(
         findProperImage(collectedPokemon?.sprites),
         'hex',
         {
@@ -105,7 +112,7 @@ export const PokemonDetail = () => {
                                 (prop, index) => {
                                     return (
                                         <PokemonTypes
-                                            types={collectedPokemon.types}
+                                            types={types}
                                             title={
                                                 prop === 'double_damage_to'
                                                     ? 'Strong'
