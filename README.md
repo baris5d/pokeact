@@ -1,4 +1,4 @@
-# Pokeact
+<img src="https://github.com/baris5d/pokeact/blob/main/public/logo.svg?raw=true" width="100" />
 
 # PokeAct App ⚡
 
