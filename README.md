@@ -6,7 +6,7 @@ Welcome to PokeAct App!
 
 The PokeAct App is a Pokédex that provides information about different Pokémon. It provides details such as their abilities, moves, and stats. You can also search for a specific Pokémon and get a detailed view of their information.
 
-PokeAct is deployed at [Vercel](https://pokeact-alpha.vercel.app/)
+PokeAct is deployed at [Vercel](pokeact-six.vercel.app/)
 
 ## Development Guide
 
