@@ -19,10 +19,10 @@ export interface Type {
 export interface DamageRelations {
     double_damage_from: PokeAPIResource[];
     double_damage_to: PokeAPIResource[];
-    half_damage_from: PokeAPIResource[];
-    half_damage_to: PokeAPIResource[];
-    no_damage_from: PokeAPIResource[];
-    no_damage_to: PokeAPIResource[];
+    half_damage_from?: PokeAPIResource[];
+    half_damage_to?: PokeAPIResource[];
+    no_damage_from?: PokeAPIResource[];
+    no_damage_to?: PokeAPIResource[];
 }
 
 export interface Sprites {

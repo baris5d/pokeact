@@ -12,8 +12,11 @@ export const PokemonTypes = (props: Props) => {
 
     return (
         <div className="pokemon-detail__strong">
-            <h3>{title} Against</h3>
-            <div className="pokemon-detail__strong-wrapper">
+            <h3 data-testid="title">{title} Against</h3>
+            <div
+                className="pokemon-detail__strong-wrapper"
+                data-testid="types-wrapper"
+            >
                 {types.map((item) => {
                     return (
                         <>
