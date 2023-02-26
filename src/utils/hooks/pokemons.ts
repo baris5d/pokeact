@@ -1,5 +1,5 @@
 // react-query hooks to fetch and cache pokemon data
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useQuery } from 'react-query';
 import { PokeAPIResource, Pokemon } from '../../types/pokemon';
@@ -40,6 +40,44 @@ export const usePokemonCollector = (id: string, desiredProps: string[]) => {
 
     const handleError = useErrorHandler();
 
+    const [collectedPokemon, setCollectedPokemon] = useState<
+        Pokemon | undefined
+    >(undefined);
+
+    useEffect(() => {
+        const getCollectedPokemon = async () => {
+            if (!isLoading && !isError && data) {
+                if (desiredProps && desiredProps.length > 0) {
+                    const items: any = {};
+                    // destruct the desiredProps array and get the data
+                    // each prop being destructured is a string that can be nested
+                    try {
+                        desiredProps.forEach(async (prop) => {
+                            const [key, subKey] = prop.split('.'); // split the prop string given [key.subkey]
+                            const lookup: any = data[key as keyof typeof data];
+                            if (!items[key]) {
+                                items[key] = [];
+                            }
+                            if (lookup && lookup.length > 0) {
+                                for (const item of lookup) {
+                                    const data = await getPokemon(
+                                        item[subKey].url,
+                                    );
+                                    items[key].push({ [subKey]: data });
+                                }
+                            }
+                        });
+                    } catch (err) {
+                        handleError(err);
+                    }
+                    const mergedData = { ...data, ...items };
+                    setCollectedPokemon(mergedData);
+                }
+            }
+        };
+        getCollectedPokemon();
+    }, [data]);
+
     const collectedProps: any = useMemo(() => {
         if (!isLoading && !isError && data) {
             return desiredProps.reduce((acc, prop) => {
@@ -48,37 +86,6 @@ export const usePokemonCollector = (id: string, desiredProps: string[]) => {
             }, {});
         }
     }, [data, isLoading, isError, desiredProps]);
-
-    const collectedPokemon: Pokemon = useMemo(() => {
-        if (!isLoading && !isError && data) {
-            if (desiredProps && desiredProps.length > 0) {
-                const items: any = {};
-                // destruct the desiredProps array and get the data
-                // each prop being destructured is a string that can be nested
-                try {
-                    desiredProps.forEach(async (prop) => {
-                        const [key, subKey] = prop.split('.'); // split the prop string given [key.subkey]
-                        const lookup: any = data[key as keyof typeof data];
-                        if (!items[key]) {
-                            items[key] = [];
-                        }
-                        if (lookup && lookup.length > 0) {
-                            for (const item of lookup) {
-                                const data = await getPokemon(item[subKey].url);
-                                items[key].push({ [subKey]: data });
-                            }
-                        }
-                    });
-                } catch (err) {
-                    handleError(err);
-                }
-                const mergedData = { ...data, ...items };
-                return mergedData;
-            }
-        }
-
-        return [];
-    }, [data, isLoading, isError, desiredProps, id]);
 
     return { collectedProps, collectedPokemon };
 };
